@@ -1,136 +1,97 @@
 # oil-reserve-prediction-bootstrap
 ML project to select the most profitable region for 200 oil wells. Uses Linear Regression to predict reserves and bootstrapping to assess profit and risk. Regions are compared based on expected profit and probability of loss (&lt;2.5%) to support data-driven decisions
 
-🛢️ Oil Well Profit Prediction & Risk Analysis (ML Project)
-📌 Project Overview
+Oil Well Profit Prediction & Risk Analysis
 
-This project simulates a real-world machine learning task for an oil extraction company (OilyGiant) aiming to identify the most profitable region to develop 200 new oil wells.
+Overview
 
-Using Linear Regression and Bootstrapping, we:
+This project predicts the most profitable regions for oil well development using machine learning and evaluates investment risk through bootstrapping techniques. By analyzing synthetic geological data from multiple regions, the model estimates oil reserve volumes, selects the top wells, and calculates expected profits and financial risk.
 
-Predict oil reserves for each well
+Project Objectives
+General Objective
 
-Select the most promising wells
+Identify the most profitable regions for oil well development by predicting reserve volumes using Linear Regression and evaluating investment risk with bootstrapping.
 
-Estimate potential profits
+Specific Objectives
 
-Evaluate financial risk
+Preprocess and explore geological datasets to ensure data quality and readiness for modeling.
 
-🎯 Objective
+Develop a Linear Regression model to predict oil reserve volumes.
 
-Select the best region for oil well development based on:
+Select the top 200 wells per region based on predicted reserves and estimate potential profits.
 
-Maximum expected profit
+Perform bootstrapping to quantify profit variability, compute confidence intervals, and assess the risk of loss.
 
-Risk of loss below 2.5%
+Compare regions based on expected profit and investment risk to recommend the optimal region for well development.
 
-📊 Dataset Description
+Visualize predicted volumes, profit distributions, and risk metrics for clear communication of results.
 
-Three datasets representing different regions:
+Dataset
 
-geo_data_0.csv
+Synthetic geological datasets of oil wells in three regions: geo_data_0.csv, geo_data_1.csv, geo_data_2.csv
 
-geo_data_1.csv
+Each dataset contains 100,000 wells with the following columns:
 
-geo_data_2.csv
+id — unique well identifier
 
-Each dataset contains:
+f0, f1, f2 — geological features
 
-id: unique well identifier
+product — volume of oil reserves (in thousands of barrels)
 
-f0, f1, f2: features (geological characteristics)
+The datasets contain no missing or duplicate values and are ready for analysis.
 
-product: oil reserves (in thousands of barrels)
+Methodology
 
-⚙️ Methodology
-1. Data Preparation
+Data Exploration & Preprocessing
 
-Load and inspect datasets
+Load datasets with Pandas
 
-Check for missing values and duplicates
+Verify data integrity
 
-2. Model Training
+Prepare features and targets for modeling
 
-Split data: 75% training / 25% validation
+Model Training
 
-Train a Linear Regression model
+Linear Regression model for predicting reserve volumes
 
-Predict reserves on validation set
+Train-validation split (75:25)
 
-3. Model Evaluation
+Compute RMSE and average predicted volume
 
-Compute:
+Profit Calculation
 
-Mean predicted reserves
+Select top 200 wells per region based on predicted reserves
 
-RMSE (Root Mean Squared Error)
+Calculate revenue and profit using REVENUE_PER_UNIT = $4,500 and a budget of $100,000,000
 
-4. Profit Calculation
-Key assumptions:
+Bootstrapping Analysis
 
-Budget: $100 million for 200 wells
+Sample 500 wells with replacement 1,000 times
 
-Revenue per unit: $4500
+Calculate distribution of profits, 95% confidence intervals, and probability of loss
 
-Break-even point: 111.1 thousand barrels per well
+Identify the safest and most profitable region
 
-Steps:
+Key Results
 
-Select top 200 wells based on predicted reserves
+Region 1 is the safest and most profitable option:
 
-Compute total reserves
+Average profit: ~$5.15M
 
-Estimate profit:
+Risk of loss: 1%
 
-profit = (total_reserves * 4500) - 100_000_000
-5. Risk Analysis (Bootstrapping)
+Regions 0 and 2 have slightly lower expected profits (~$4.3–4.4M) but higher risk (~6%).
 
-Perform 1000 bootstrap samples
+Bootstrapping confirms Region 1 as the optimal choice, balancing high expected profit with low investment risk.
 
-For each sample:
+Technologies & Tools
 
-Select 500 wells randomly
+Python 3.11
 
-Choose top 200 based on predictions
+Pandas & NumPy for data handling
 
-Compute profit
+Scikit-learn for Linear Regression and metrics
 
-Metrics:
+Matplotlib / Seaborn for visualization
 
-Average profit
-
-95% confidence interval
-
-Risk of loss (%)
-
-📈 Results Summary
-Region	Avg Profit	Risk of Loss	Decision
-Region 0	...	...	❌
-Region 1	...	...	✅
-Region 2	...	...	❌
-
-👉 Final selection is based on:
-
-Risk < 2.5%
-
-Highest average profit among valid regions
-
-🧠 Key Insights
-
-High predicted reserves ≠ low risk
-
-Bootstrapping is essential for realistic uncertainty estimation
-
-Some regions may look profitable but carry unacceptable risk
-
-🛠️ Tech Stack
-
-Python
-
-Pandas
-
-NumPy
-
-Scikit-learn
-
-Matplotlib / Seaborn
+Pathlib for project file management
